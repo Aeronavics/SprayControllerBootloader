@@ -211,18 +211,21 @@ extern "C" {
     /* Notable Flash addresses */
 #define USER_FLASH_BANK1_START_ADDRESS  0x08000000
     //#define USER_FLASH_BANK2_START_ADDRESS  0x08080000
-#define USER_FLASH_BANK1_END_ADDRESS    FLASH_BANK1_END
+//#define USER_FLASH_BANK1_END_ADDRESS    FLASH_BANK1_END
+#define USER_FLASH_BANK1_END_ADDRESS			ADDR_FLASH_PAGE_16 - 1
     //#define USER_FLASH_BANK2_END_ADDRESS    FLASH_BANK2_END
 
     /* Define the user application size */
 #define USER_FLASH_SIZE               ((uint32_t)0x00003C000) /* Small default template application */
 
     /* Define bitmap representing user flash area that could be write protected (check restricted to pages 8-39). */
-#define FLASH_PAGE_TO_BE_PROTECTED (OB_WRP_PAGES8TO9 | OB_WRP_PAGES10TO11 | OB_WRP_PAGES12TO13 | OB_WRP_PAGES14TO15 | \
-                                    OB_WRP_PAGES16TO17 | OB_WRP_PAGES18TO19 | OB_WRP_PAGES20TO21 | OB_WRP_PAGES22TO23 | \
-                                    OB_WRP_PAGES24TO25 | OB_WRP_PAGES26TO27 | OB_WRP_PAGES28TO29 | OB_WRP_PAGES30TO31 | \
-                                    OB_WRP_PAGES32TO33 | OB_WRP_PAGES34TO35 | OB_WRP_PAGES36TO37 | OB_WRP_PAGES38TO39  )  
+//#define FLASH_PAGE_TO_BE_PROTECTED (OB_WRP_PAGES8TO9 | OB_WRP_PAGES10TO11 | OB_WRP_PAGES12TO13 | OB_WRP_PAGES14TO15 | \
+//                                    OB_WRP_PAGES16TO17 | OB_WRP_PAGES18TO19 | OB_WRP_PAGES20TO21 | OB_WRP_PAGES22TO23 | \
+//                                    OB_WRP_PAGES24TO25 | OB_WRP_PAGES26TO27 | OB_WRP_PAGES28TO29 | OB_WRP_PAGES30TO31 | \
+//                                    OB_WRP_PAGES32TO33 | OB_WRP_PAGES34TO35 | OB_WRP_PAGES36TO37 | OB_WRP_PAGES38TO39  )
 
+
+#define FLASH_PAGE_TO_BE_PROTECTED 0
 
     /* Exported macro ------------------------------------------------------------*/
     /* ABSoulute value */

@@ -104,6 +104,7 @@ extern "C" {
 #define GPIO_STATUS_1_Pin GPIO_PIN_3
 #define GPIO_STATUS_1_GPIO_Port GPIOE
 
+#define APPLICATION_PAGE_NUM    (uint32_t)25
 #define APPLICATION_ADDRESS     (uint32_t)0x0800C800    
 #define APPLICATION_OFFSET      (uint32_t)0//0x200 //offset of the actual application code (accounting for the schmoo before)
 #define RAM_BOOTLOADER_ACTION_LOCATION 0x20000000

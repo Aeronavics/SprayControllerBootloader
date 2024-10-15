@@ -37,3 +37,5 @@
 .project
 Modules/dsdl_generated/
 Modules/generated/
+Debug/
+Release/

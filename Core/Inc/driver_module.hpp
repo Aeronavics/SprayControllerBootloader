@@ -86,7 +86,7 @@ public:
      * @param	Nothing.
      * @return	Nothing.
      */
-    virtual void sync_update_unthrottled();
+    virtual void sync_update_unthrottled()=0;
 
     /**
      * Perform synchronous housekeeping for the driver; this method gets called at 100Hz.
@@ -94,7 +94,7 @@ public:
      * @param	Nothing.
      * @return	Nothing.
      */
-    virtual void sync_update_100Hz();
+    virtual void sync_update_100Hz()=0;
 
     /**
      * Perform synchronous housekeeping for the driver; this method gets called at 100Hz.
@@ -105,7 +105,7 @@ public:
      * @param	uint8_t iterator.
      * @return	Nothing.
      */
-    virtual void sync_update_100Hz(uint8_t iterator) {
+    virtual void sync_update_100Hz(uint8_t iterator){
         return;
     }
 
@@ -115,7 +115,7 @@ public:
      * @param	Nothing.
      * @return	Nothing.
      */
-    virtual void sync_update_10Hz();
+    virtual void sync_update_10Hz()=0;
 
     /**
      * Perform synchronous housekeeping for the driver; this method gets called at 1Hz.
@@ -123,7 +123,7 @@ public:
      * @param	Nothing.
      * @return	Nothing.
      */
-    virtual void sync_update_1Hz();
+    virtual void sync_update_1Hz()=0;
 
     /**
      * Handle a MAVlink message which has been received.

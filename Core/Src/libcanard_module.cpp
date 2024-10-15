@@ -190,7 +190,7 @@ void Libcanard_module::sync_update_100Hz()
                            */
                           if (offset % 2048 == 0)
                           {
-                              FLASH_If_Erase_Page(FLASH_START_ADDRESS + (offset));
+                              FLASH_If_Erase_Page(FLASH_START_ADDRESS + (offset % 0x200));
                           }
                           FLASH_If_Write(FLASH_START_ADDRESS + offset, reinterpret_cast<uint32_t*> (tmp_array), read_result_ / 4);
                           offset += read_result_;
@@ -308,7 +308,8 @@ void Libcanard_module::sync_update_1Hz()
                     }
                     #endif
                     //start the STM32 CAN drivers
-                    MX_CAN_Init();
+                    MX_FDCAN1_Init();
+                    MX_FDCAN2_Init();
 
                     //todo:fix bit rate allocation
                     this->can_bus_bit_rate_ = 1000000; //can_bus_bit_rate;
@@ -1170,7 +1171,7 @@ void Libcanard_module::onTransferReception(CanardRxTransfer * const transfer)
       data signature is not used when internally transferring
     */
 
-    driverhost_broadcast_can(transfer, 0, transfer->data_type_id, &transfer->transfer_id, transfer->priority, transfer->payload_head, transfer->payload_len, this);
+//    driverhost_broadcast_can(transfer, 0, transfer->data_type_id, &transfer->transfer_id, transfer->priority, transfer->payload_head, transfer->payload_len, this);
     /**
       Let us clear the transfer for Justin Case. This might already be released, in this case we have re-released it. Noice.
     */

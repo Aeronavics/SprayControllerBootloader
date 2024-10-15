@@ -52,11 +52,12 @@
   
 /* Includes ------------------------------------------------------------------*/
 #include "flash_if.h"
-#include "common.h"
 #include "ymodem.h"
 #include "string.h"
 //#include "stm32_iap_bootloader.hpp"
 #include "menu.h"
+
+#include "common.h"
 
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
@@ -392,7 +393,7 @@ COM_StatusTypeDef Ymodem_Receive ( uint32_t *p_size )
                       result = COM_LIMIT;
                     }
                     /* erase user application area */
-                    FLASH_If_Erase(APPLICATION_ADDRESS);
+                    FLASH_If_Erase(APPLICATION_PAGE_NUM);
                     *p_size = filesize;
 
                     Serial_PutByte(ACK);
