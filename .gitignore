@@ -32,8 +32,6 @@
 *.app
 
 .settings/
-.cproject
-.mxproject
 .project
 Modules/dsdl_generated/
 Modules/generated/
