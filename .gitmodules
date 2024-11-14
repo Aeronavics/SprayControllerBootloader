@@ -10,3 +10,6 @@
 [submodule "Modules/dronecan_dsdlc"]
 	path = Modules/dronecan_dsdlc
 	url = git@github.com:Aeronavics/dronecan_dsdlc.git
+[submodule "Modules/STMBareCommon"]
+	path = Modules/STMBareCommon
+	url = git@github.com:Aeronavics/STMBareCommon.git

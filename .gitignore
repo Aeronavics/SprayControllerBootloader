@@ -31,9 +31,15 @@
 *.out
 *.app
 
+# Generated libraries
+Modules/mavlink_generated
+Modules/dsdl_generated
+
+# Build artifacts
+Debug
+Release
+
+*.launch
+
 .settings/
 .project
-Modules/dsdl_generated/
-Modules/generated/
-Debug/
-Release/

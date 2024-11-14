@@ -1,43 +1,14 @@
-/**
- ******************************************************************************
- * @file    IAP_Main/Inc/flash_if.h 
- * @author  MCD Application Team
- * @version V1.6.0
- * @date    12-May-2017
- * @brief   This file provides all the headers of the flash_if functions.
- ******************************************************************************
- * @attention
+/*
+ * flash_if.h
  *
- * <h2><center>&copy; COPYRIGHT(c) 2016 STMicroelectronics</center></h2>
- *
- * Redistribution and use in source and binary forms, with or without modification,
- * are permitted provided that the following conditions are met:
- *   1. Redistributions of source code must retain the above copyright notice,
- *      this list of conditions and the following disclaimer.
- *   2. Redistributions in binary form must reproduce the above copyright notice,
- *      this list of conditions and the following disclaimer in the documentation
- *      and/or other materials provided with the distribution.
- *   3. Neither the name of STMicroelectronics nor the names of its contributors
- *      may be used to endorse or promote products derived from this software
- *      without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
- * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
- * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
- * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
- * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
- * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
- * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- *
- ******************************************************************************
+ *  Created on: Nov 14, 2024
+ *      Author: jmorritt
  */
 
-/* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __FLASH_IF_H
-#define __FLASH_IF_H
+#ifndef INC_FLASH_IF_H_
+#define INC_FLASH_IF_H_
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -211,8 +182,7 @@ extern "C" {
     /* Notable Flash addresses */
 #define USER_FLASH_BANK1_START_ADDRESS  0x08000000
     //#define USER_FLASH_BANK2_START_ADDRESS  0x08080000
-//#define USER_FLASH_BANK1_END_ADDRESS    FLASH_BANK1_END
-#define USER_FLASH_BANK1_END_ADDRESS			ADDR_FLASH_PAGE_16 - 1
+#define USER_FLASH_BANK1_END_ADDRESS    0x0807FFFF
     //#define USER_FLASH_BANK2_END_ADDRESS    FLASH_BANK2_END
 
     /* Define the user application size */
@@ -223,9 +193,8 @@ extern "C" {
 //                                    OB_WRP_PAGES16TO17 | OB_WRP_PAGES18TO19 | OB_WRP_PAGES20TO21 | OB_WRP_PAGES22TO23 | \
 //                                    OB_WRP_PAGES24TO25 | OB_WRP_PAGES26TO27 | OB_WRP_PAGES28TO29 | OB_WRP_PAGES30TO31 | \
 //                                    OB_WRP_PAGES32TO33 | OB_WRP_PAGES34TO35 | OB_WRP_PAGES36TO37 | OB_WRP_PAGES38TO39  )
+#define FLASH_PAGE_TO_BE_PROTECTED (OB_WRPAREA_BANK1_AREAA | OB_WRPAREA_BANK1_AREAB)
 
-
-#define FLASH_PAGE_TO_BE_PROTECTED 0
 
     /* Exported macro ------------------------------------------------------------*/
     /* ABSoulute value */
@@ -250,6 +219,4 @@ extern "C" {
 #endif
 
 
-#endif  /* __FLASH_IF_H */
-
-/************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/
+#endif /* INC_FLASH_IF_H_ */

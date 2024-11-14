@@ -52,12 +52,21 @@ extern "C" {
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 void SystemClock_Config(void);
-
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define ERROR0_Pin GPIO_PIN_6
+#define ERROR0_GPIO_Port GPIOA
+#define ERROR1_Pin GPIO_PIN_7
+#define ERROR1_GPIO_Port GPIOA
+#define STATUS1_Pin GPIO_PIN_0
+#define STATUS1_GPIO_Port GPIOB
+#define STATUS2_Pin GPIO_PIN_1
+#define STATUS2_GPIO_Port GPIOB
+#define STATUS3_Pin GPIO_PIN_2
+#define STATUS3_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
