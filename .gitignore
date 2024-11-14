@@ -40,6 +40,3 @@ Debug
 Release
 
 *.launch
-
-.settings/
-.project
