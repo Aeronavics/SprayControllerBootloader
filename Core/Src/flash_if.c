@@ -120,34 +120,22 @@ uint32_t FLASH_If_Write(uint32_t destination, uint32_t *p_source, uint32_t lengt
     /* Unlock the Flash to enable the flash control register access *************/
     HAL_FLASH_Unlock();
 
-    for (i = 0; (i < length -1) && (destination <= (USER_FLASH_BANK1_END_ADDRESS - 4)); i++) {
+    for (i = 0; (i < length) && (destination <= (USER_FLASH_BANK1_END_ADDRESS - 4)); i = i + 2) {
         /* Device voltage range supposed to be [2.7V to 3.6V], the operation will
            be done by word */
-        if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_FAST, destination, *(uint32_t*) (p_source + i)) == HAL_OK) {
+        if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_DOUBLEWORD, destination, *(uint64_t*) (p_source + i)) == HAL_OK) {
             /* Check the written value */
-            if (*(uint32_t*) destination != *(uint32_t*) (p_source + i)) {
+            if (*(uint64_t*) destination != *(uint64_t*) (p_source + i)) {
                 /* Flash content doesn't match SRAM content */
                 return (FLASHIF_WRITINGCTRL_ERROR);
             }
             /* Increment FLASH destination address */
-            destination += 4;
+            destination += 8;
         } else {
             /* Error occurred while writing data in Flash memory */
             return (FLASHIF_WRITING_ERROR);
         }
     }
-    if (HAL_FLASH_Program(FLASH_TYPEPROGRAM_FAST_AND_LAST, destination, *(uint32_t*) (p_source + i)) == HAL_OK) {
-				/* Check the written value */
-				if (*(uint32_t*) destination != *(uint32_t*) (p_source + i)) {
-						/* Flash content doesn't match SRAM content */
-						return (FLASHIF_WRITINGCTRL_ERROR);
-				}
-				/* Increment FLASH destination address */
-				destination += 4;
-		} else {
-				/* Error occurred while writing data in Flash memory */
-				return (FLASHIF_WRITING_ERROR);
-		}
 
     /* Lock the Flash to disable the flash control register access (recommended
        to protect the FLASH memory against possible unwanted operation) *********/

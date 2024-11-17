@@ -75,7 +75,7 @@ int main(void)
         Boot();
     }
 
-    Libcanard_module::get_driver().set_name("dfu.aeronavics.ipdb");
+    Libcanard_module::get_driver().set_name("dfu.aeronavics.SprayCtrl");
     HAL_Init();
 
     /* Configure the system clock to 72 MHz */
@@ -91,8 +91,16 @@ int main(void)
 
     MX_USART1_UART_Init();
 
+    HAL_GPIO_WritePin(ERROR0_GPIO_Port, ERROR0_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(ERROR1_GPIO_Port, ERROR1_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(STATUS1_GPIO_Port, STATUS1_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(STATUS2_GPIO_Port, STATUS2_Pin, GPIO_PIN_SET);
+	HAL_GPIO_WritePin(STATUS3_GPIO_Port, STATUS3_Pin, GPIO_PIN_SET);
+
     //start a uart receive, this will interrupt and cause our code to split into uart bootloader mode or into can bootloader mode
     //(or nothing! which just boots!)
+
+    HAL_Delay(500);
 
     Serial_PutString((uint8_t *) "  Enter \"ymodem\" to upload code via ymodem, or init a CAN device\r\n\n");
     HAL_UART_Receive_IT(&UartHandle, (uint8_t *)uart_buffer, 1);

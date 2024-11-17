@@ -15,6 +15,9 @@ extern "C" {
     /* Includes ------------------------------------------------------------------*/
 #include "stm32g4xx.h"
 #include "usart.h"
+#include "fdcan.h"
+#include "gpio.h"
+#include "tim.h"
 #include <stdbool.h>
 
 
@@ -80,6 +83,16 @@ extern "C" {
     uint32_t Str2Int(uint8_t *inputstr, uint32_t *intnum);
     void Serial_PutString(uint8_t *p_string);
     HAL_StatusTypeDef Serial_PutByte(uint8_t param);
+    void deinitEverything(void);
+
+typedef void (application_t)(void);
+
+typedef struct
+{
+	uint32_t		stack_addr;     // Stack Pointer
+	application_t*	func_p;        // Program Counter
+} JumpStruct;
+
 #ifdef __cplusplus
 }
 #endif
