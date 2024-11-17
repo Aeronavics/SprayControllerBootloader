@@ -22,17 +22,42 @@ void Set_Boot(void) {
 }
 
 void Boot(void) {
-    if (((*(__IO uint32_t*) (APPLICATION_ADDRESS + APPLICATION_OFFSET)) & 0x2FFE0000) == 0x20000000) {
+//    if (((*(__IO uint32_t*) (APPLICATION_ADDRESS + APPLICATION_OFFSET)) & 0x2FFE0000) == 0x20000000) {
+//
+//        pFunction JumpToApplication;
+//        uint32_t JumpAddress;
+//        /* Jump to user application */
+//        JumpAddress = *(__IO uint32_t*) (APPLICATION_ADDRESS + APPLICATION_OFFSET + 4);
+//        JumpToApplication = (pFunction) JumpAddress;
+//        /* Initialize user application's Stack Pointer */
+//        __set_MSP(*(__IO uint32_t*) (APPLICATION_ADDRESS + APPLICATION_OFFSET));
+//        JumpToApplication();
+//    }
+	if (((*(__IO uint32_t*) (APPLICATION_ADDRESS)) & 0x2FFE0000) == 0x20000000) {
+		const JumpStruct* vector_p = (JumpStruct*)(APPLICATION_ADDRESS);
 
-        pFunction JumpToApplication;
-        uint32_t JumpAddress;
-        /* Jump to user application */
-        JumpAddress = *(__IO uint32_t*) (APPLICATION_ADDRESS + APPLICATION_OFFSET + 4);
-        JumpToApplication = (pFunction) JumpAddress;
-        /* Initialize user application's Stack Pointer */
-        __set_MSP(*(__IO uint32_t*) (APPLICATION_ADDRESS + APPLICATION_OFFSET));
-        JumpToApplication();
-    }
+		deinitEverything();
+
+		/* let's do The Jump! */
+		/* Jump, used asm to avoid stack optimization */
+		asm("msr msp, %0; bx %1;" : : "r"(vector_p->stack_addr), "r"(vector_p->func_p));
+	}
+}
+
+void deinitEverything(void)
+{
+	HAL_TIM_Base_MspDeInit(&htim1);
+	HAL_TIM_Base_MspDeInit(&htim2);
+
+	HAL_UART_MspDeInit(&huart1);
+
+	HAL_FDCAN_MspDeInit(&hfdcan1);
+	HAL_FDCAN_MspDeInit(&hfdcan2);
+
+	HAL_DeInit();
+	SysTick->CTRL = 0;
+	SysTick->LOAD = 0;
+	SysTick->VAL = 0;
 }
 
 /**
